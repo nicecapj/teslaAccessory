@@ -42,6 +42,16 @@ cd deploy
 gcloud run deploy tesla-accessory-map --source . --region asia-northeast3 --allow-unauthenticated
 ```
 
+### jedragon.kr (VM nginx)
+`https://jedragon.kr` 은 이 프로젝트의 Compute Engine VM(us-east1, 기존 nginx에 서버 블록 추가)에서
+서빙합니다. 페이지 갱신:
+```bash
+python tools/build.py --adsense --out deploy/index.html
+gcloud compute scp deploy/index.html instance-20251228-162235:/tmp/jedragon-index.html --zone us-east1-c
+gcloud compute ssh instance-20251228-162235 --zone us-east1-c --command "sudo mv /tmp/jedragon-index.html /var/www/jedragon/index.html"
+```
+HTTPS는 Let's Encrypt(certbot 자동 갱신), ads.txt 포함.
+
 ### GitHub Pages
 저장소 Settings → Pages → Deploy from branch → `main` / root 를 선택하면
 `https://nicecapj.github.io/teslaAccessory/` 로 서빙됩니다 (index.html이 루트에 있음).
