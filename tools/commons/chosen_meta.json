@@ -1,0 +1,44 @@
+{
+ "juniper_ext": {
+  "file": "Tesla Model Y Juniper Stealth Grey (5).jpg",
+  "artist": "Damian B Oh",
+  "license": "CC BY-SA 4.0",
+  "ok": true,
+  "size": 301896
+ },
+ "juniper_int": {
+  "file": "Tesla Model Y 2025 interior.jpg",
+  "artist": "Ethan Llamas",
+  "license": "CC BY-SA 4.0",
+  "ok": true,
+  "size": 191048
+ },
+ "yl_ext": {
+  "file": "Tesla Model Y L 004.jpg",
+  "artist": "JustAnotherCarDesigner",
+  "license": "CC0",
+  "ok": true,
+  "size": 1966
+ },
+ "yl_int": {
+  "file": "Tesla Model Y L Premium Long Range AWD interior.jpg",
+  "artist": "Ethan Llamas",
+  "license": "CC BY-SA 4.0",
+  "ok": true,
+  "size": 203308
+ },
+ "m3_ext": {
+  "file": "Tesla Model 3 'Highland' (2024) 2.jpg",
+  "artist": "Mliu92",
+  "license": "CC BY-SA 4.0",
+  "ok": true,
+  "size": 1966
+ },
+ "m3_int": {
+  "file": "Upgraded Tesla Model 3 - 2023 - Interior.jpg",
+  "artist": "Mpelas199",
+  "license": "CC0",
+  "ok": true,
+  "size": 357762
+ }
+}

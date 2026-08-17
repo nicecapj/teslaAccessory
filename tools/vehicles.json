@@ -1,0 +1,86 @@
+{
+  "juniper": {
+    "ext": {
+      "file": "embed_juniper_ext.jpg",
+      "credit": "주니퍼 외관: Damian B Oh, CC BY-SA 4.0",
+      "markers": {
+        "ext-front": [20, 63],
+        "ext-wiper": [45, 42],
+        "ext-camera": [55, 53],
+        "ext-door": [65, 52],
+        "ext-wheel": [46, 74],
+        "ext-roof": [60, 27]
+      }
+    },
+    "int": {
+      "file": "embed_juniper_int.jpg",
+      "credit": "주니퍼 실내: Ethan Llamas, CC BY-SA 4.0",
+      "markers": {
+        "int-pedal": [26, 82],
+        "int-wheel": [42, 47],
+        "int-screen": [59, 36],
+        "int-dash": [83, 35],
+        "int-console": [67, 64],
+        "int-seat": [86, 72],
+        "int-door": [94, 48],
+        "int-floor": [38, 91]
+      }
+    }
+  },
+  "yl": {
+    "ext": {
+      "file": "embed_yl_ext.jpg",
+      "credit": "YL 외관: JustAnotherCarDesigner, CC0",
+      "markers": {
+        "ext-front": [5, 55],
+        "ext-wiper": [30, 45],
+        "ext-camera": [23, 56],
+        "ext-door": [48, 52],
+        "ext-wheel": [15, 69],
+        "ext-roof": [55, 28],
+        "ext-charge": [94, 49],
+        "ext-rear": [90, 37]
+      }
+    },
+    "int": {
+      "file": "embed_yl_int.jpg",
+      "credit": "YL 실내: Ethan Llamas, CC BY-SA 4.0",
+      "markers": {
+        "int-pedal": [33, 69],
+        "int-wheel": [21, 38],
+        "int-screen": [54, 25],
+        "int-dash": [78, 30],
+        "int-console": [53, 57],
+        "int-seat": [76, 84],
+        "int-door": [96, 45],
+        "int-floor": [36, 82]
+      }
+    }
+  },
+  "m3": {
+    "ext": {
+      "file": "embed_m3_ext.jpg",
+      "credit": "모델3 외관: Mliu92, CC BY-SA 4.0",
+      "markers": {
+        "ext-front": [35, 62],
+        "ext-wiper": [57, 30],
+        "ext-camera": [75, 35],
+        "ext-door": [86, 35],
+        "ext-wheel": [68, 52],
+        "ext-roof": [74, 17]
+      }
+    },
+    "int": {
+      "file": "embed_m3_int.jpg",
+      "credit": "모델3 실내: Mpelas199, CC0",
+      "markers": {
+        "int-wheel": [37, 55],
+        "int-mirror": [74, 7],
+        "int-screen": [73, 47],
+        "int-dash": [92, 45],
+        "int-console": [66, 78],
+        "int-door": [6, 60]
+      }
+    }
+  }
+}

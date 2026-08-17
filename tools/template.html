@@ -1,0 +1,484 @@
+<title>주니퍼 악세사리 맵</title>
+<style>
+:root{
+  --bg:#f3f4f6; --surface:#ffffff; --surface2:#eef0f3;
+  --ink:#171a20; --ink2:#3c4250; --muted:#6a7280;
+  --line:#e2e5ea; --line2:#d3d7de;
+  --accent:#2e62e8; --accent-ink:#ffffff; --accent-soft:#e9eefc; --accent-line:#c4d2f6;
+  --ali:#d63c1e; --ali-soft:#fdeee9; --naver:#0a9e56; --naver-soft:#e7f6ee;
+  --tune:#7a5af5; --tune-soft:#f0ecfe; --ess:#c2261f; --ess-soft:#fdecec;
+  --shadow:0 1px 2px rgba(23,26,32,.05),0 8px 24px -12px rgba(23,26,32,.12);
+  --scrim:rgba(23,26,32,.55);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0e1013; --surface:#171a20; --surface2:#1e222a;
+    --ink:#e9ecf1; --ink2:#c6ccd6; --muted:#8d96a5;
+    --line:#2a303a; --line2:#374050;
+    --accent:#7aa2ff; --accent-ink:#0e1013; --accent-soft:#1c2740; --accent-line:#31447a;
+    --ali:#ff7a5c; --ali-soft:#33201b; --naver:#3ecb8b; --naver-soft:#15291f;
+    --tune:#a68bff; --tune-soft:#241d3d; --ess:#ff6b62; --ess-soft:#3a1c1a;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px -14px rgba(0,0,0,.6);
+    --scrim:rgba(0,0,0,.65);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0e1013; --surface:#171a20; --surface2:#1e222a;
+  --ink:#e9ecf1; --ink2:#c6ccd6; --muted:#8d96a5;
+  --line:#2a303a; --line2:#374050;
+  --accent:#7aa2ff; --accent-ink:#0e1013; --accent-soft:#1c2740; --accent-line:#31447a;
+  --ali:#ff7a5c; --ali-soft:#33201b; --naver:#3ecb8b; --naver-soft:#15291f;
+  --tune:#a68bff; --tune-soft:#241d3d; --ess:#ff6b62; --ess-soft:#3a1c1a;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px -14px rgba(0,0,0,.6);
+  --scrim:rgba(0,0,0,.65);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:'Pretendard Variable',Pretendard,'Apple SD Gothic Neo','Malgun Gothic',system-ui,sans-serif;
+  font-size:15px; line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+
+.wrap{max-width:1280px;margin:0 auto;padding:0 20px 80px}
+
+/* ---------- header ---------- */
+header.top{padding:30px 0 16px;display:flex;flex-wrap:wrap;align-items:flex-end;gap:16px 28px;border-bottom:1px solid var(--line)}
+.brand h1{margin:0;font-size:26px;font-weight:800;letter-spacing:-.02em}
+.brand .eyebrow{font-size:11px;font-weight:700;letter-spacing:.16em;color:var(--muted);text-transform:uppercase;margin-bottom:4px}
+.brand .meta{font-size:13px;color:var(--muted);margin-top:4px}
+.budget{margin-left:auto;text-align:right}
+.budget .lab{font-size:11px;font-weight:700;letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+.budget .val{font-size:22px;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.budget .val small{font-size:13px;font-weight:600;color:var(--muted);margin-left:6px}
+
+/* ---------- vehicle tabs ---------- */
+.vtabs{display:flex;gap:8px;padding-top:16px;flex-wrap:wrap}
+.vtab{border:1px solid var(--line2);background:var(--surface);border-radius:12px;padding:9px 18px;font-size:14px;font-weight:700;color:var(--ink2)}
+.vtab:hover{border-color:var(--accent)}
+.vtab.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.vtab .n{opacity:.6;font-weight:600;margin-left:5px;font-variant-numeric:tabular-nums}
+
+/* ---------- filter bar ---------- */
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:12px 0;position:sticky;top:0;z-index:30;background:var(--bg)}
+.chip{border:1px solid var(--line2);background:var(--surface);border-radius:999px;padding:5px 14px;font-size:13px;font-weight:600;color:var(--ink2)}
+.chip:hover{border-color:var(--accent)}
+.chip.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chip.ess-chip.on{background:var(--ess);border-color:var(--ess);color:#fff}
+.chip .n{font-variant-numeric:tabular-nums;color:inherit;opacity:.55;margin-left:4px}
+.zoneclear{display:none;margin-left:auto;background:var(--accent-soft);border:1px solid var(--accent-line);color:var(--accent);border-radius:999px;padding:5px 14px;font-size:13px;font-weight:700}
+.zoneclear.show{display:inline-block}
+
+/* ---------- layout ---------- */
+main{display:grid;grid-template-columns:minmax(430px,530px) minmax(0,1fr);gap:36px;align-items:start;margin-top:10px}
+.stage{position:sticky;top:54px}
+.view{background:var(--surface);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);padding:14px;margin-bottom:14px}
+.view-label{display:flex;justify-content:space-between;align-items:baseline;padding:0 4px 10px}
+.view-label b{font-size:12px;font-weight:800;letter-spacing:.18em;text-transform:uppercase}
+.view-label span{font-size:12px;color:var(--muted)}
+.photo{position:relative;border-radius:12px;overflow:hidden;background:var(--surface2)}
+.photo img{width:100%;height:auto;display:block}
+.mk{position:absolute;width:26px;height:26px;margin:-13px 0 0 -13px;border-radius:50%;
+  background:var(--surface);border:2px solid var(--accent);color:var(--accent);
+  font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 1px 6px rgba(0,0,0,.35);font-variant-numeric:tabular-nums;padding:0}
+.mk:hover,.mk.hi{background:var(--accent);color:var(--accent-ink)}
+.mk.on{background:var(--accent);border-color:#fff;color:var(--accent-ink)}
+@keyframes mkpulse{0%{box-shadow:0 0 0 0 var(--accent)}100%{box-shadow:0 0 0 14px transparent}}
+.mk.pulse{animation:mkpulse .9s ease-out 2}
+@media (prefers-reduced-motion: reduce){.mk.pulse{animation:none}}
+.offmap{display:flex;flex-wrap:wrap;gap:6px;padding:10px 4px 0}
+.offmap .lab{width:100%;font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+.zchip{border:1px solid var(--line2);background:var(--bg);border-radius:999px;padding:3px 11px;font-size:12.5px;font-weight:600;color:var(--ink2)}
+.zchip b{color:var(--accent);margin-right:4px;font-variant-numeric:tabular-nums}
+.zchip:hover{border-color:var(--accent)}
+.zchip.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.zchip.on b{color:var(--accent-ink)}
+.stage .hint{font-size:12.5px;color:var(--muted);margin:2px 6px}
+.noview{padding:26px 16px;color:var(--muted);font-size:13.5px;text-align:center}
+
+/* ---------- list ---------- */
+.zone-group{margin-bottom:26px}
+.zone-head{display:flex;align-items:center;gap:12px;padding:10px 4px 8px;position:sticky;top:48px;background:var(--bg);z-index:10;cursor:pointer;border-bottom:1px solid var(--line)}
+.zone-head .num{flex:none;width:28px;height:28px;border-radius:50%;border:2px solid var(--accent);color:var(--accent);font-size:12.5px;font-weight:800;display:flex;align-items:center;justify-content:center;font-variant-numeric:tabular-nums}
+.zone-head .t{font-size:16px;font-weight:800;letter-spacing:-.01em}
+.zone-head .d{font-size:12.5px;color:var(--muted)}
+.zone-head .cnt{margin-left:auto;font-size:12px;font-weight:700;color:var(--muted);font-variant-numeric:tabular-nums}
+.zone-group.active .zone-head{border-bottom-color:var(--accent)}
+.zone-group.active .zone-head .t{color:var(--accent)}
+.items{display:flex;flex-direction:column;gap:10px;padding-top:12px}
+
+.item{display:flex;gap:14px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 14px;box-shadow:var(--shadow)}
+.item.picked{border-color:var(--accent-line);background:linear-gradient(0deg,var(--accent-soft),var(--accent-soft)),var(--surface)}
+.item .thumb{flex:none;width:64px;height:64px;border-radius:10px;object-fit:cover;border:1px solid var(--line);background:var(--surface2);cursor:zoom-in}
+.item .thumb.ph{display:flex;align-items:center;justify-content:center;color:var(--muted);cursor:default}
+.item .thumb.ph svg{width:26px;height:26px}
+.item .bd{min-width:0;flex:1}
+.item .nm{font-weight:700;font-size:14.5px;letter-spacing:-.01em}
+.essbadge{display:inline-block;background:var(--ess-soft);color:var(--ess);font-size:10.5px;font-weight:800;border-radius:5px;padding:1px 7px;margin-left:6px;letter-spacing:.04em;vertical-align:2px}
+.alias{font-size:11.5px;color:var(--ess);opacity:.85;margin-top:1px}
+.item .ttl{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:1px}
+.item .row{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;margin-top:8px}
+.srcchip{flex:none;font-size:10.5px;font-weight:800;letter-spacing:.06em;border-radius:5px;padding:2px 7px}
+.srcchip.ali{background:var(--ali-soft);color:var(--ali)}
+.srcchip.naver{background:var(--naver-soft);color:var(--naver)}
+.srcchip.tune{background:var(--tune-soft);color:var(--tune)}
+.pricebox{display:flex;align-items:center;gap:4px;border:1px solid var(--line2);border-radius:8px;padding:3px 8px;background:var(--bg)}
+.pricebox span{font-size:12px;color:var(--muted)}
+.pricebox input{width:76px;border:0;background:transparent;color:var(--ink);font:inherit;font-size:13.5px;font-weight:700;font-variant-numeric:tabular-nums;text-align:right;outline:none}
+.pricebox input::placeholder{color:var(--muted);font-weight:500}
+.pricebox:focus-within{border-color:var(--accent)}
+.btn{font-size:12.5px;font-weight:700;border:1px solid var(--line2);border-radius:8px;padding:4px 10px;background:var(--surface);text-decoration:none;white-space:nowrap}
+.btn:hover{border-color:var(--accent);color:var(--accent)}
+.btn.primary{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.btn.primary:hover{color:var(--bg);opacity:.85}
+.pick{flex:none;display:flex}
+.pick input{width:17px;height:17px;accent-color:var(--accent);cursor:pointer}
+.empty{color:var(--muted);font-size:14px;padding:30px 10px;text-align:center}
+
+/* ---------- modal ---------- */
+.modal{position:fixed;inset:0;background:var(--scrim);display:none;align-items:center;justify-content:center;z-index:100;padding:20px}
+.modal.open{display:flex}
+.sheet{background:var(--surface);border-radius:18px;max-width:640px;width:100%;max-height:88vh;overflow-y:auto;box-shadow:var(--shadow);padding:20px}
+.sheet .mhead{display:flex;align-items:flex-start;gap:10px}
+.sheet h2{margin:0;font-size:18px;font-weight:800;flex:1}
+.sheet .close{flex:none;font-size:20px;color:var(--muted);padding:2px 8px}
+.sheet .msub{font-size:12.5px;color:var(--muted);margin:4px 0 12px}
+.gal{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.gal img{width:100%;height:auto;border-radius:10px;border:1px solid var(--line);display:block}
+.gal img.big{grid-column:1/-1}
+.sheet .mrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.galnote{font-size:12px;color:var(--muted);margin-top:10px}
+
+footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted)}
+footer p{margin:4px 0}
+
+.chip:focus-visible,.btn:focus-visible,.mk:focus-visible,.zchip:focus-visible,.vtab:focus-visible,.zone-head:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+@media (max-width:980px){
+  main{grid-template-columns:1fr}
+  .stage{position:static}
+}
+</style>
+
+<div class="wrap">
+<header class="top">
+  <div class="brand">
+    <div class="eyebrow">Tesla Accessory Map</div>
+    <h1>주니퍼 악세사리 맵</h1>
+    <div class="meta" id="meta-line"></div>
+  </div>
+  <div class="budget">
+    <div class="lab">담은 아이템 예산</div>
+    <div class="val"><span id="budget-sum">₩0</span><small id="budget-cnt">0개 선택</small></div>
+  </div>
+</header>
+
+<div class="vtabs" id="vtabs"></div>
+
+<div class="bar" id="filterbar">
+  <button class="chip on" data-src="all">전체 <span class="n" id="n-all"></span></button>
+  <button class="chip ess-chip" data-src="ess">★ 필수 <span class="n" id="n-ess"></span></button>
+  <button class="chip" data-src="ali">AliExpress <span class="n" id="n-ali"></span></button>
+  <button class="chip" data-src="naver">네이버 <span class="n" id="n-naver"></span></button>
+  <button class="chip" data-src="tune">티슬릭스 튜닝 <span class="n" id="n-tune"></span></button>
+  <button class="chip" data-src="picked">담은 것만</button>
+  <button class="zoneclear" id="zoneclear">부위 필터 해제 ✕</button>
+</div>
+
+<main>
+  <section class="stage">
+    <div id="views"></div>
+    <p class="hint">번호 = 악세사리가 달리는 부위. 마커나 부위 이름을 누르면 그 부위만 모아 보여줍니다. 사진에 없는 부위는 사진 아래 버튼으로 이동하세요.</p>
+  </section>
+  <section class="list" id="list"></section>
+</main>
+
+<footer>
+  <p><b>가격 안내</b> — 알리익스프레스 가격은 옵션·프로모션·환율에 따라 수시로 바뀌어 자동 표시가 어렵습니다. <b>상품 보기</b>로 현재 가격을 확인한 뒤 가격 칸에 입력하면 이 브라우저에 저장되고, 체크한 아이템의 예산 합계가 위에 표시됩니다. <b>최저가 검색</b>은 알리익스프레스에서 같은 종류 상품을 낮은 가격순으로 정렬해 보여줍니다.</p>
+  <p>★ 필수 = 직접 고른 필수 장착 목록 · 상품명/이미지 수집: 2026-08-18 · 목록 출처: 테슬라 주니퍼 &amp; YL 악세사리 정리 엑셀</p>
+  <p id="credits"></p>
+</footer>
+</div>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true">
+  <div class="sheet">
+    <div class="mhead"><h2 id="m-title"></h2><button class="close" id="m-close" aria-label="닫기">✕</button></div>
+    <div class="msub" id="m-sub"></div>
+    <div class="gal" id="m-gal"></div>
+    <div class="galnote" id="m-note"></div>
+    <div class="mrow" id="m-row"></div>
+  </div>
+</div>
+
+<script>
+const DATA = /*__DATA__*/;
+
+const fmt = n => '₩' + Number(n).toLocaleString('ko-KR');
+const store = (() => {
+  try { localStorage.setItem('__t','1'); localStorage.removeItem('__t'); return localStorage; }
+  catch(e){ const m={}; return {getItem:k=>m[k]??null,setItem:(k,v)=>m[k]=String(v),removeItem:k=>delete m[k]}; }
+})();
+
+let vehicle = DATA.vehicles[0].id;
+let srcFilter = 'all';
+let zoneFilter = null;
+
+const listEl = document.getElementById('list');
+const viewsEl = document.getElementById('views');
+const zoneById = {};
+DATA.zones.forEach(z => zoneById[z.id] = z);
+const vehById = {};
+DATA.vehicles.forEach(v => vehById[v.id] = v);
+
+const vehItems = vid => DATA.items.filter(it => it.cars.includes(vid));
+
+/* ---------- vehicle tabs ---------- */
+function renderVtabs(){
+  document.getElementById('vtabs').innerHTML = DATA.vehicles.map(v =>
+    `<button class="vtab ${v.id===vehicle?'on':''}" data-v="${v.id}">${v.label}<span class="n">${vehItems(v.id).length}</span></button>`
+  ).join('');
+  document.querySelectorAll('.vtab').forEach(b => b.addEventListener('click', () => {
+    vehicle = b.dataset.v; zoneFilter = null;
+    document.getElementById('zoneclear').classList.remove('show');
+    renderVtabs(); renderViews(); render();
+  }));
+}
+
+/* ---------- stage: photos + markers ---------- */
+function renderViews(){
+  const v = vehById[vehicle];
+  const items = vehItems(vehicle);
+  const zonesWithItems = DATA.zones.filter(z => items.some(it => it.zone===z.id));
+  const placed = new Set();
+  let html = '';
+  [['ext','Exterior','외관'],['int','Interior','실내']].forEach(([key,en,ko]) => {
+    const view = v.views && v.views[key];
+    const zoneChips = zs => zs.map(z =>
+      `<button class="zchip" data-zone="${z.id}"><b>${z.num}</b>${z.name}</button>`).join('');
+    if(view){
+      const marked = zonesWithItems.filter(z => view.markers[z.id]);
+      marked.forEach(z => placed.add(z.id));
+      const off = zonesWithItems.filter(z => z.view===key && !view.markers[z.id]);
+      html += `<div class="view">
+        <div class="view-label"><b>${en}</b><span>${ko}</span></div>
+        <div class="photo"><img src="${view.img}" alt="${v.label} ${ko} 사진">
+          ${marked.map(z => `<button class="mk" data-zone="${z.id}" style="left:${view.markers[z.id][0]}%;top:${view.markers[z.id][1]}%" title="${z.num}. ${z.name}">${z.num}</button>`).join('')}
+        </div>
+        ${off.length?`<div class="offmap"><span class="lab">사진에 없는 부위</span>${zoneChips(off)}</div>`:''}
+      </div>`;
+    } else {
+      const zs = zonesWithItems.filter(z => z.view===key);
+      html += `<div class="view">
+        <div class="view-label"><b>${en}</b><span>${ko}</span></div>
+        <div class="offmap">${zoneChips(zs)}</div>
+      </div>`;
+      zs.forEach(z => placed.add(z.id));
+    }
+  });
+  viewsEl.innerHTML = html;
+  viewsEl.querySelectorAll('.mk,.zchip').forEach(el =>
+    el.addEventListener('click', () => toggleZone(el.dataset.zone)));
+  syncMarkers();
+}
+
+/* ---------- list ---------- */
+const PH_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2"/><path d="M3 17l5-4 4 3 4-5 5 6"/></svg>';
+
+function itemHTML(it){
+  const picked = store.getItem('pick:'+it.id)==='1';
+  const price = store.getItem('price:'+it.id) || '';
+  const chipCls = it.group==='tune' ? 'tune' : it.source;
+  const chipTxt = it.group==='tune' ? 'TESLIX' : (it.source==='ali' ? 'ALI' : 'NAVER');
+  const hasGal = (it.photos && it.photos.length) || it.thumb;
+  const thumb = it.thumb
+    ? `<img class="thumb" src="${it.thumb}" alt="" loading="lazy" data-gal="${it.id}" title="사진 크게 보기">`
+    : `<div class="thumb ph">${PH_ICON}</div>`;
+  const ess = it.essential ? `<span class="essbadge">★ 필수</span>` : '';
+  const alias = (it.essential && it.essential!=='필수') ? `<div class="alias">필수 목록: ${it.essential}</div>` : '';
+  let btns = '';
+  if(it.noProduct){
+    btns = `<a class="btn primary" href="${it.url}" target="_blank" rel="noopener">알리 최저가 검색 ↗</a>`;
+  } else {
+    btns = `<a class="btn primary" href="${it.url}" target="_blank" rel="noopener">상품 보기 ↗</a>`;
+    if(it.search) btns += ` <a class="btn" href="${it.search}" target="_blank" rel="noopener">${it.source==='naver'?'알리 동일제품 검색':'최저가 검색'} ↗</a>`;
+  }
+  const galBtn = hasGal ? `<button class="btn" data-gal="${it.id}">사진 보기</button>` : '';
+  return `<article class="item ${picked?'picked':''}" data-id="${it.id}" data-zone="${it.zone}">
+    <label class="pick" title="예산에 담기"><input type="checkbox" ${picked?'checked':''} aria-label="예산에 담기"></label>
+    ${thumb}
+    <div class="bd">
+      <div class="nm">${it.name}${ess}</div>
+      ${alias}
+      ${it.title ? `<div class="ttl" title="${it.title.replace(/"/g,'&quot;')}">${it.title}</div>` : ''}
+      <div class="row">
+        <span class="srcchip ${chipCls}">${chipTxt}</span>
+        <span class="pricebox"><input inputmode="numeric" placeholder="가격 입력" value="${price}" aria-label="가격(원)"><span>원</span></span>
+        ${btns} ${galBtn}
+      </div>
+    </div>
+  </article>`;
+}
+
+function matches(it){
+  if(!it.cars.includes(vehicle)) return false;
+  if(zoneFilter && it.zone!==zoneFilter) return false;
+  if(srcFilter==='picked') return store.getItem('pick:'+it.id)==='1';
+  if(srcFilter==='ess') return !!it.essential;
+  if(srcFilter==='ali') return it.source==='ali';
+  if(srcFilter==='naver') return it.source==='naver' && it.group!=='tune';
+  if(srcFilter==='tune') return it.group==='tune';
+  return true;
+}
+
+function render(){
+  let html = '';
+  DATA.zones.forEach(z => {
+    const items = DATA.items.filter(it => it.zone===z.id && matches(it));
+    if(!items.length) return;
+    html += `<div class="zone-group ${zoneFilter===z.id?'active':''}" data-zone="${z.id}">
+      <div class="zone-head" data-zone="${z.id}" tabindex="0" role="button">
+        <span class="num">${z.num}</span>
+        <div><div class="t">${z.name}</div><div class="d">${z.desc}</div></div>
+        <span class="cnt">${items.length}개</span>
+      </div>
+      <div class="items">${items.map(itemHTML).join('')}</div>
+    </div>`;
+  });
+  listEl.innerHTML = html || '<div class="empty">조건에 맞는 악세사리가 없습니다.</div>';
+  bindList();
+  syncMarkers();
+  updateBudget();
+  updateCounts();
+}
+
+function bindList(){
+  listEl.querySelectorAll('.zone-head').forEach(h => {
+    const act = () => toggleZone(h.dataset.zone);
+    h.addEventListener('click', act);
+    h.addEventListener('keydown', e => { if(e.key==='Enter'||e.key===' '){e.preventDefault();act();} });
+  });
+  listEl.querySelectorAll('[data-gal]').forEach(el =>
+    el.addEventListener('click', () => openModal(+el.dataset.gal)));
+  listEl.querySelectorAll('.item').forEach(card => {
+    const id = card.dataset.id, zid = card.dataset.zone;
+    card.addEventListener('mouseenter', () => hiMarker(zid,true));
+    card.addEventListener('mouseleave', () => hiMarker(zid,false));
+    card.querySelector('.pick input').addEventListener('change', e => {
+      store.setItem('pick:'+id, e.target.checked?'1':'0');
+      card.classList.toggle('picked', e.target.checked);
+      updateBudget();
+    });
+    const pi = card.querySelector('.pricebox input');
+    pi.addEventListener('input', () => {
+      const v = pi.value.replace(/[^0-9]/g,'');
+      if(v!==pi.value) pi.value = v;
+      store.setItem('price:'+id, v);
+      updateBudget();
+    });
+  });
+}
+
+function hiMarker(zid,on){
+  viewsEl.querySelectorAll(`.mk[data-zone="${zid}"],.zchip[data-zone="${zid}"]`).forEach(m => {
+    m.classList.toggle('hi', on);
+    if(m.classList.contains('mk')){
+      if(on){ m.classList.remove('pulse'); void m.offsetWidth; m.classList.add('pulse'); }
+      else m.classList.remove('pulse');
+    }
+  });
+}
+
+function toggleZone(zid){
+  zoneFilter = (zoneFilter===zid) ? null : zid;
+  document.getElementById('zoneclear').classList.toggle('show', !!zoneFilter);
+  render();
+  if(zoneFilter){
+    const g = listEl.querySelector(`.zone-group[data-zone="${zid}"]`);
+    if(g) g.scrollIntoView({behavior:'smooth',block:'start'});
+  }
+}
+
+function syncMarkers(){
+  viewsEl.querySelectorAll('.mk,.zchip').forEach(m =>
+    m.classList.toggle('on', m.dataset.zone===zoneFilter));
+}
+
+function updateBudget(){
+  let sum=0, cnt=0;
+  DATA.items.forEach(it => {
+    if(store.getItem('pick:'+it.id)==='1'){
+      cnt++;
+      const p = parseInt(store.getItem('price:'+it.id)||'0',10);
+      if(p) sum+=p;
+    }
+  });
+  document.getElementById('budget-sum').textContent = fmt(sum);
+  document.getElementById('budget-cnt').textContent = cnt+'개 선택';
+}
+
+function updateCounts(){
+  const its = vehItems(vehicle);
+  const n = (id,v) => document.getElementById(id).textContent = v;
+  n('n-all', its.length);
+  n('n-ess', its.filter(i=>i.essential).length);
+  n('n-ali', its.filter(i=>i.source==='ali').length);
+  n('n-naver', its.filter(i=>i.source==='naver'&&i.group!=='tune').length);
+  n('n-tune', its.filter(i=>i.group==='tune').length);
+  document.getElementById('meta-line').textContent =
+    `${vehById[vehicle].label} 기준 ${its.length}개 아이템 · ★ 필수 ${its.filter(i=>i.essential).length}개 · ${DATA.zones.length}개 부위`;
+}
+
+/* ---------- modal ---------- */
+const modal = document.getElementById('modal');
+function openModal(id){
+  const it = DATA.items.find(x=>x.id===id);
+  if(!it) return;
+  const photos = (it.photos && it.photos.length) ? it.photos : (it.thumb?[it.thumb]:[]);
+  document.getElementById('m-title').textContent = it.name;
+  document.getElementById('m-sub').textContent = it.title || '';
+  document.getElementById('m-gal').innerHTML =
+    photos.map((p,i)=>`<img src="${p}" alt="${it.name} 사진 ${i+1}" class="${photos.length===1||i===0?'big':''}">`).join('');
+  document.getElementById('m-note').textContent =
+    (it.photos&&it.photos.length>1) ? '판매 페이지의 상품 사진 (장착 모습 포함)' :
+    '지금은 대표 사진만 있습니다. 장착 사진은 상품 페이지에서 더 볼 수 있어요.';
+  let btns = it.noProduct
+    ? `<a class="btn primary" href="${it.url}" target="_blank" rel="noopener">알리 최저가 검색 ↗</a>`
+    : `<a class="btn primary" href="${it.url}" target="_blank" rel="noopener">상품 보기 ↗</a>` +
+      (it.search?` <a class="btn" href="${it.search}" target="_blank" rel="noopener">최저가 검색 ↗</a>`:'');
+  document.getElementById('m-row').innerHTML = btns;
+  modal.classList.add('open');
+}
+document.getElementById('m-close').addEventListener('click', ()=>modal.classList.remove('open'));
+modal.addEventListener('click', e => { if(e.target===modal) modal.classList.remove('open'); });
+document.addEventListener('keydown', e => { if(e.key==='Escape') modal.classList.remove('open'); });
+
+/* ---------- filters ---------- */
+document.querySelectorAll('#filterbar .chip').forEach(c => {
+  c.addEventListener('click', () => {
+    document.querySelectorAll('#filterbar .chip').forEach(x=>x.classList.remove('on'));
+    c.classList.add('on');
+    srcFilter = c.dataset.src;
+    render();
+  });
+});
+document.getElementById('zoneclear').addEventListener('click', () => toggleZone(zoneFilter));
+
+/* ---------- photo credits ---------- */
+(() => {
+  const credits = [];
+  DATA.vehicles.forEach(v => {
+    if(!v.views) return;
+    Object.values(v.views).forEach(view => { if(view.credit) credits.push(view.credit); });
+  });
+  if(credits.length)
+    document.getElementById('credits').innerHTML = '차량 사진: ' + credits.join(' · ') + ' (Wikimedia Commons)';
+})();
+
+renderVtabs();
+renderViews();
+render();
+</script>
