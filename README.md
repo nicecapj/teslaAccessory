@@ -1,6 +1,6 @@
 # 주니퍼 악세사리 맵 (Tesla Accessory Map)
 
-테슬라 **모델 Y 주니퍼 / 모델 3 하이랜드 / 모델 Y L** 악세사리 59종을
+테슬라 **모델 Y 주니퍼 / 모델 3 하이랜드 / 모델 Y L** 악세사리 73종을
 실제 차량 사진 위의 부위별 마커로 확인하고, 알리익스프레스 최저가를 찾아 기록하는
 단일 파일 정적 웹앱입니다.
 
@@ -23,14 +23,13 @@ tools/                      # 재생성 파이프라인
   vehicles.json             #   차종별 사진 파일과 마커 좌표(%)
   items.json                #   수집된 아이템 데이터
   commons/                  #   차량 사진 (Wikimedia Commons, CC BY-SA 4.0 / CC0)
-테슬라 주니퍼 & YL 악세사리 정리 엑셀.xlsx   # 원본 악세사리 목록
 ```
 
 ## 다시 빌드하기
 
 ```bash
 pip install openpyxl requests pillow
-python tools/scrape.py   # (선택) 상품 데이터 다시 수집 — AliExpress 봇 차단에 걸릴 수 있음
+python tools/scrape.py   # (선택) 상품 데이터 재수집 — 원본 엑셀 필요(저장소 미포함), AliExpress 봇 차단 주의
 python tools/build.py    # index.html 재생성
 ```
 
@@ -38,7 +37,7 @@ python tools/build.py    # index.html 재생성
 
 ### Cloud Run (권장)
 ```bash
-cp index.html deploy/index.html
+python tools/build.py --adsense --out deploy/index.html
 cd deploy
 gcloud run deploy tesla-accessory-map --source . --region asia-northeast3 --allow-unauthenticated
 ```

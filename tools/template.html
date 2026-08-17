@@ -1,4 +1,5 @@
 <title>주니퍼 악세사리 맵</title>
+<!--ADSENSE-->
 <style>
 :root{
   --bg:#f3f4f6; --surface:#ffffff; --surface2:#eef0f3;
@@ -50,6 +51,7 @@ header.top{padding:30px 0 16px;display:flex;flex-wrap:wrap;align-items:flex-end;
 .brand h1{margin:0;font-size:26px;font-weight:800;letter-spacing:-.02em}
 .brand .eyebrow{font-size:11px;font-weight:700;letter-spacing:.16em;color:var(--muted);text-transform:uppercase;margin-bottom:4px}
 .brand .meta{font-size:13px;color:var(--muted);margin-top:4px}
+.brand .meta .visits{margin-left:8px;padding-left:8px;border-left:1px solid var(--line2)}
 .budget{margin-left:auto;text-align:right}
 .budget .lab{font-size:11px;font-weight:700;letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
 .budget .val{font-size:22px;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
@@ -74,13 +76,13 @@ header.top{padding:30px 0 16px;display:flex;flex-wrap:wrap;align-items:flex-end;
 
 /* ---------- layout ---------- */
 main{display:grid;grid-template-columns:minmax(430px,530px) minmax(0,1fr);gap:36px;align-items:start;margin-top:10px}
-.stage{position:sticky;top:54px}
+.stage{position:sticky;top:54px;max-height:calc(100vh - 60px);overflow-y:auto;padding-right:4px}
 .view{background:var(--surface);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);padding:14px;margin-bottom:14px}
 .view-label{display:flex;justify-content:space-between;align-items:baseline;padding:0 4px 10px}
 .view-label b{font-size:12px;font-weight:800;letter-spacing:.18em;text-transform:uppercase}
 .view-label span{font-size:12px;color:var(--muted)}
 .photo{position:relative;border-radius:12px;overflow:hidden;background:var(--surface2)}
-.photo img{width:100%;height:auto;display:block}
+.photo img,.photo svg{width:100%;height:auto;display:block}
 .mk{position:absolute;width:26px;height:26px;margin:-13px 0 0 -13px;border-radius:50%;
   background:var(--surface);border:2px solid var(--accent);color:var(--accent);
   font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;
@@ -90,15 +92,23 @@ main{display:grid;grid-template-columns:minmax(430px,530px) minmax(0,1fr);gap:36
 @keyframes mkpulse{0%{box-shadow:0 0 0 0 var(--accent)}100%{box-shadow:0 0 0 14px transparent}}
 .mk.pulse{animation:mkpulse .9s ease-out 2}
 @media (prefers-reduced-motion: reduce){.mk.pulse{animation:none}}
-.offmap{display:flex;flex-wrap:wrap;gap:6px;padding:10px 4px 0}
+.offmap{display:flex;flex-wrap:wrap;gap:6px;padding:12px 8px 4px}
 .offmap .lab{width:100%;font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
 .zchip{border:1px solid var(--line2);background:var(--bg);border-radius:999px;padding:3px 11px;font-size:12.5px;font-weight:600;color:var(--ink2)}
 .zchip b{color:var(--accent);margin-right:4px;font-variant-numeric:tabular-nums}
 .zchip:hover{border-color:var(--accent)}
 .zchip.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
 .zchip.on b{color:var(--accent-ink)}
-.stage .hint{font-size:12.5px;color:var(--muted);margin:2px 6px}
-.noview{padding:26px 16px;color:var(--muted);font-size:13.5px;text-align:center}
+.stage .hint{font-size:12.5px;color:var(--muted);margin:2px 6px 10px}
+
+/* ---------- svg diagram art ---------- */
+.d-line{fill:none;stroke:var(--ink2);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.d-thin{fill:none;stroke:var(--ink2);stroke-width:1.3;stroke-linecap:round;opacity:.55}
+.d-fill{fill:var(--surface);stroke:var(--ink2);stroke-width:2.2;stroke-linejoin:round}
+.d-soft{fill:var(--surface2);stroke:var(--line2);stroke-width:1.4}
+.d-dash{fill:none;stroke:var(--muted);stroke-width:1.3;stroke-dasharray:5 4;opacity:.8}
+.d-acc{fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.8}
+.d-tag{fill:var(--muted);font-size:13px;font-weight:600;font-family:inherit}
 
 /* ---------- list ---------- */
 .zone-group{margin-bottom:26px}
@@ -128,9 +138,11 @@ main{display:grid;grid-template-columns:minmax(430px,530px) minmax(0,1fr);gap:36
 .srcchip.tune{background:var(--tune-soft);color:var(--tune)}
 .pricebox{display:flex;align-items:center;gap:4px;border:1px solid var(--line2);border-radius:8px;padding:3px 8px;background:var(--bg)}
 .pricebox span{font-size:12px;color:var(--muted)}
-.pricebox input{width:76px;border:0;background:transparent;color:var(--ink);font:inherit;font-size:13.5px;font-weight:700;font-variant-numeric:tabular-nums;text-align:right;outline:none}
+.pricebox input{width:82px;border:0;background:transparent;color:var(--ink);font:inherit;font-size:13.5px;font-weight:700;font-variant-numeric:tabular-nums;text-align:right;outline:none}
 .pricebox input::placeholder{color:var(--muted);font-weight:500}
 .pricebox:focus-within{border-color:var(--accent)}
+.refbtn{font-size:11.5px;font-weight:700;color:var(--muted);border:1px dashed var(--line2);border-radius:7px;padding:3px 8px;font-variant-numeric:tabular-nums}
+.refbtn:hover{color:var(--accent);border-color:var(--accent)}
 .btn{font-size:12.5px;font-weight:700;border:1px solid var(--line2);border-radius:8px;padding:4px 10px;background:var(--surface);text-decoration:none;white-space:nowrap}
 .btn:hover{border-color:var(--accent);color:var(--accent)}
 .btn.primary{background:var(--ink);border-color:var(--ink);color:var(--bg)}
@@ -156,11 +168,11 @@ main{display:grid;grid-template-columns:minmax(430px,530px) minmax(0,1fr);gap:36
 footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted)}
 footer p{margin:4px 0}
 
-.chip:focus-visible,.btn:focus-visible,.mk:focus-visible,.zchip:focus-visible,.vtab:focus-visible,.zone-head:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.chip:focus-visible,.btn:focus-visible,.mk:focus-visible,.zchip:focus-visible,.vtab:focus-visible,.zone-head:focus-visible,.refbtn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 
 @media (max-width:980px){
   main{grid-template-columns:1fr}
-  .stage{position:static}
+  .stage{position:static;max-height:none;overflow:visible}
 }
 </style>
 
@@ -169,7 +181,7 @@ footer p{margin:4px 0}
   <div class="brand">
     <div class="eyebrow">Tesla Accessory Map</div>
     <h1>주니퍼 악세사리 맵</h1>
-    <div class="meta" id="meta-line"></div>
+    <div class="meta"><span id="meta-line"></span><span class="visits" id="visits" hidden></span></div>
   </div>
   <div class="budget">
     <div class="lab">담은 아이템 예산</div>
@@ -191,15 +203,15 @@ footer p{margin:4px 0}
 
 <main>
   <section class="stage">
+    <p class="hint">번호 = 악세사리가 달리는 부위. 마커나 부위 이름을 누르면 그 부위만 모아 보여줍니다.</p>
     <div id="views"></div>
-    <p class="hint">번호 = 악세사리가 달리는 부위. 마커나 부위 이름을 누르면 그 부위만 모아 보여줍니다. 사진에 없는 부위는 사진 아래 버튼으로 이동하세요.</p>
   </section>
   <section class="list" id="list"></section>
 </main>
 
 <footer>
-  <p><b>가격 안내</b> — 알리익스프레스 가격은 옵션·프로모션·환율에 따라 수시로 바뀌어 자동 표시가 어렵습니다. <b>상품 보기</b>로 현재 가격을 확인한 뒤 가격 칸에 입력하면 이 브라우저에 저장되고, 체크한 아이템의 예산 합계가 위에 표시됩니다. <b>최저가 검색</b>은 알리익스프레스에서 같은 종류 상품을 낮은 가격순으로 정렬해 보여줍니다.</p>
-  <p>★ 필수 = 직접 고른 필수 장착 목록 · 상품명/이미지 수집: 2026-08-18 · 목록 출처: 테슬라 주니퍼 &amp; YL 악세사리 정리 엑셀</p>
+  <p><b>가격 안내</b> — 알리익스프레스 가격은 옵션·프로모션·환율에 따라 수시로 바뀝니다. <b>상품 보기</b>로 현재 가격을 확인한 뒤 가격 칸에 입력하면 이 브라우저에 저장됩니다. 회색 <b>참고가</b>는 직접 확인해둔 가격이며 누르면 가격 칸에 채워집니다. 예산 합계는 입력가(없으면 참고가) 기준입니다. <b>최저가 검색</b>은 같은 종류 상품을 낮은 가격순으로 검색합니다.</p>
+  <p>★ 필수 = 직접 고른 필수 장착 목록 · 상품명/이미지 수집: 2026-08-18</p>
   <p id="credits"></p>
 </footer>
 </div>
@@ -216,6 +228,78 @@ footer p{margin:4px 0}
 
 <script>
 const DATA = /*__DATA__*/;
+
+/* Shared close-up diagram views (same layout on all three cars) */
+const ENTRY_SVG = `
+<svg viewBox="0 0 920 430" role="img" aria-label="운전석 승하차 도해">
+  <path class="d-thin" d="M20,392 L900,392" style="stroke-width:2"/>
+  <!-- open front door (left) -->
+  <path class="d-fill" d="M56,96 L296,64 L312,120 L316,352 L92,382 Z"/>
+  <path class="d-thin" d="M74,120 L292,92"/>
+  <rect class="d-soft" x="118" y="150" width="150" height="34" rx="10"/>
+  <circle class="d-soft" cx="132" cy="300" r="26"/>
+  <path class="d-soft" d="M104,336 L306,314 L308,344 L96,368 Z"/>
+  <text class="d-tag" x="112" y="242">도어 포켓</text>
+  <text class="d-tag" x="96" y="360" style="font-size:12px">킥(발길질) 부위</text>
+  <!-- body opening -->
+  <path class="d-line" d="M348,70 L718,70 L748,120 L752,392"/>
+  <path class="d-line" d="M348,70 L342,392"/>
+  <rect class="d-fill" x="752" y="88" width="34" height="304" rx="8"/>
+  <text class="d-tag" x="760" y="80" style="font-size:12px">B필러</text>
+  <!-- door sill plate with guards -->
+  <path class="d-acc" d="M342,336 L752,336 L760,392 L334,392 Z"/>
+  <rect class="d-soft" x="380" y="350" width="150" height="16" rx="7"/>
+  <rect class="d-soft" x="560" y="350" width="150" height="16" rx="7"/>
+  <text class="d-tag" x="392" y="330">도어 실(문턱) — 실가드 부착</text>
+  <!-- interior floor + mat -->
+  <path class="d-soft" d="M368,240 L730,240 L744,326 L356,326 Z"/>
+  <path class="d-dash" d="M392,256 L714,256 M386,282 L720,282 M378,308 L728,308"/>
+  <text class="d-tag" x="392" y="232">플로어 매트</text>
+  <!-- pedals deep inside -->
+  <rect class="d-soft" x="392" y="150" width="26" height="52" rx="7"/>
+  <rect class="d-soft" x="434" y="158" width="20" height="44" rx="7"/>
+  <text class="d-tag" x="384" y="140" style="font-size:12px">페달</text>
+  <!-- seat side -->
+  <path class="d-fill" d="M568,150 C640,140 690,148 706,168 L710,250 C712,272 700,282 676,284 L590,284 C570,282 560,270 560,248 Z"/>
+  <path class="d-soft" d="M566,284 L706,284 L700,318 L574,318 Z"/>
+  <text class="d-tag" x="586" y="205">1열 시트</text>
+  <text class="d-tag" x="578" y="312" style="font-size:12px">시트 아래 수납 공간</text>
+</svg>`;
+
+const TRUNK_SVG = `
+<svg viewBox="0 0 920 430" role="img" aria-label="트렁크 도해">
+  <!-- open tailgate -->
+  <path class="d-fill" d="M206,26 L714,26 L768,92 L152,92 Z"/>
+  <path class="d-thin" d="M244,44 L676,44 L706,76 L214,76 Z"/>
+  <text class="d-tag" x="396" y="66">열린 테일게이트</text>
+  <!-- trunk opening -->
+  <path class="d-line" d="M140,92 L780,92 L788,368 L132,368 Z"/>
+  <!-- 2nd row seatback -->
+  <path class="d-soft" d="M196,112 L724,112 L724,172 L196,172 Z"/>
+  <path class="d-thin" d="M512,112 L512,172"/>
+  <text class="d-tag" x="212" y="148">2열 시트 등받이</text>
+  <!-- side bins -->
+  <rect class="d-dash" x="152" y="184" width="52" height="140" rx="10"/>
+  <rect class="d-dash" x="716" y="184" width="52" height="140" rx="10"/>
+  <text class="d-tag" x="142" y="344" style="font-size:12px">사이드 수납</text>
+  <text class="d-tag" x="688" y="344" style="font-size:12px">사이드 수납</text>
+  <!-- trunk floor mat -->
+  <path class="d-soft" d="M216,184 L704,184 L712,324 L208,324 Z"/>
+  <path class="d-dash" d="M320,196 L326,314 M460,196 L460,314 M598,196 L594,314"/>
+  <path class="d-dash" d="M368,236 L556,236 L556,290 L368,290 Z" />
+  <text class="d-tag" x="232" y="212">트렁크 매트 · 가드</text>
+  <text class="d-tag" x="382" y="270" style="font-size:12px">바닥 아래 수납</text>
+  <!-- bumper sill -->
+  <path class="d-acc" d="M132,368 L788,368 L800,414 L120,414 Z"/>
+  <text class="d-tag" x="380" y="400">범퍼 · 테일게이트 보호커버</text>
+</svg>`;
+
+const SHARED_VIEWS = [
+  {key:"entry", en:"Interior · Entry", ko:"승하차 · 도어 스텝 (도해)", svg:ENTRY_SVG,
+   markers:{"int-door":[60,84],"int-floor":[60,66],"int-pedal":[45,41],"int-seat":[69,50]}},
+  {key:"trunk", en:"Interior · Trunk", ko:"트렁크 (도해)", svg:TRUNK_SVG,
+   markers:{"int-rear":[50,33],"int-trunk":[50,59],"ext-rear":[50,91]}},
+];
 
 const fmt = n => '₩' + Number(n).toLocaleString('ko-KR');
 const store = (() => {
@@ -248,37 +332,30 @@ function renderVtabs(){
   }));
 }
 
-/* ---------- stage: photos + markers ---------- */
+/* ---------- stage: photos + diagrams + markers ---------- */
 function renderViews(){
   const v = vehById[vehicle];
   const items = vehItems(vehicle);
   const zonesWithItems = DATA.zones.filter(z => items.some(it => it.zone===z.id));
+  const views = [...(v.views||[]), ...SHARED_VIEWS];
   const placed = new Set();
   let html = '';
-  [['ext','Exterior','외관'],['int','Interior','실내']].forEach(([key,en,ko]) => {
-    const view = v.views && v.views[key];
-    const zoneChips = zs => zs.map(z =>
-      `<button class="zchip" data-zone="${z.id}"><b>${z.num}</b>${z.name}</button>`).join('');
-    if(view){
-      const marked = zonesWithItems.filter(z => view.markers[z.id]);
-      marked.forEach(z => placed.add(z.id));
-      const off = zonesWithItems.filter(z => z.view===key && !view.markers[z.id]);
-      html += `<div class="view">
-        <div class="view-label"><b>${en}</b><span>${ko}</span></div>
-        <div class="photo"><img src="${view.img}" alt="${v.label} ${ko} 사진">
-          ${marked.map(z => `<button class="mk" data-zone="${z.id}" style="left:${view.markers[z.id][0]}%;top:${view.markers[z.id][1]}%" title="${z.num}. ${z.name}">${z.num}</button>`).join('')}
-        </div>
-        ${off.length?`<div class="offmap"><span class="lab">사진에 없는 부위</span>${zoneChips(off)}</div>`:''}
-      </div>`;
-    } else {
-      const zs = zonesWithItems.filter(z => z.view===key);
-      html += `<div class="view">
-        <div class="view-label"><b>${en}</b><span>${ko}</span></div>
-        <div class="offmap">${zoneChips(zs)}</div>
-      </div>`;
-      zs.forEach(z => placed.add(z.id));
-    }
+  views.forEach(view => {
+    const marked = zonesWithItems.filter(z => view.markers && view.markers[z.id]);
+    marked.forEach(z => placed.add(z.id));
+    const inner = view.svg ? view.svg : `<img src="${view.img}" alt="${v.label} ${view.ko}">`;
+    html += `<div class="view">
+      <div class="view-label"><b>${view.en}</b><span>${view.ko}</span></div>
+      <div class="photo">${inner}
+        ${marked.map(z => `<button class="mk" data-zone="${z.id}" style="left:${view.markers[z.id][0]}%;top:${view.markers[z.id][1]}%" title="${z.num}. ${z.name}">${z.num}</button>`).join('')}
+      </div>
+    </div>`;
   });
+  const off = zonesWithItems.filter(z => !placed.has(z.id));
+  if(off.length){
+    html += `<div class="view"><div class="offmap"><span class="lab">그림에 없는 부위</span>${off.map(z =>
+      `<button class="zchip" data-zone="${z.id}"><b>${z.num}</b>${z.name}</button>`).join('')}</div></div>`;
+  }
   viewsEl.innerHTML = html;
   viewsEl.querySelectorAll('.mk,.zchip').forEach(el =>
     el.addEventListener('click', () => toggleZone(el.dataset.zone)));
@@ -299,6 +376,7 @@ function itemHTML(it){
     : `<div class="thumb ph">${PH_ICON}</div>`;
   const ess = it.essential ? `<span class="essbadge">★ 필수</span>` : '';
   const alias = (it.essential && it.essential!=='필수') ? `<div class="alias">필수 목록: ${it.essential}</div>` : '';
+  const ref = it.ref ? `<button class="refbtn" data-ref="${it.ref}" title="확인해둔 참고가 — 누르면 가격 칸에 채워집니다">참고 ${Number(it.ref).toLocaleString('ko-KR')}</button>` : '';
   let btns = '';
   if(it.noProduct){
     btns = `<a class="btn primary" href="${it.url}" target="_blank" rel="noopener">알리 최저가 검색 ↗</a>`;
@@ -317,6 +395,7 @@ function itemHTML(it){
       <div class="row">
         <span class="srcchip ${chipCls}">${chipTxt}</span>
         <span class="pricebox"><input inputmode="numeric" placeholder="가격 입력" value="${price}" aria-label="가격(원)"><span>원</span></span>
+        ${ref}
         ${btns} ${galBtn}
       </div>
     </div>
@@ -379,6 +458,12 @@ function bindList(){
       store.setItem('price:'+id, v);
       updateBudget();
     });
+    const rb = card.querySelector('.refbtn');
+    if(rb) rb.addEventListener('click', () => {
+      pi.value = rb.dataset.ref;
+      store.setItem('price:'+id, rb.dataset.ref);
+      updateBudget();
+    });
   });
 }
 
@@ -407,14 +492,15 @@ function syncMarkers(){
     m.classList.toggle('on', m.dataset.zone===zoneFilter));
 }
 
+function priceOf(it){
+  const p = parseInt(store.getItem('price:'+it.id)||'0',10);
+  return p || it.ref || 0;
+}
+
 function updateBudget(){
   let sum=0, cnt=0;
   DATA.items.forEach(it => {
-    if(store.getItem('pick:'+it.id)==='1'){
-      cnt++;
-      const p = parseInt(store.getItem('price:'+it.id)||'0',10);
-      if(p) sum+=p;
-    }
+    if(store.getItem('pick:'+it.id)==='1'){ cnt++; sum += priceOf(it); }
   });
   document.getElementById('budget-sum').textContent = fmt(sum);
   document.getElementById('budget-cnt').textContent = cnt+'개 선택';
@@ -429,7 +515,7 @@ function updateCounts(){
   n('n-naver', its.filter(i=>i.source==='naver'&&i.group!=='tune').length);
   n('n-tune', its.filter(i=>i.group==='tune').length);
   document.getElementById('meta-line').textContent =
-    `${vehById[vehicle].label} 기준 ${its.length}개 아이템 · ★ 필수 ${its.filter(i=>i.essential).length}개 · ${DATA.zones.length}개 부위`;
+    `${vehById[vehicle].label} 기준 ${its.length}개 아이템 · ★ 필수 ${its.filter(i=>i.essential).length}개`;
 }
 
 /* ---------- modal ---------- */
@@ -467,13 +553,25 @@ document.querySelectorAll('#filterbar .chip').forEach(c => {
 });
 document.getElementById('zoneclear').addEventListener('click', () => toggleZone(zoneFilter));
 
+/* ---------- visitor counter (fails silently where외부 요청이 막힌 경우) ---------- */
+(() => {
+  try {
+    fetch('https://abacus.jasoncameron.dev/hit/nicecapj-tesla-map/visits')
+      .then(r => r.json())
+      .then(d => {
+        if(d && d.value){
+          const el = document.getElementById('visits');
+          el.textContent = '방문 ' + Number(d.value).toLocaleString('ko-KR') + '회';
+          el.hidden = false;
+        }
+      }).catch(()=>{});
+  } catch(e){}
+})();
+
 /* ---------- photo credits ---------- */
 (() => {
   const credits = [];
-  DATA.vehicles.forEach(v => {
-    if(!v.views) return;
-    Object.values(v.views).forEach(view => { if(view.credit) credits.push(view.credit); });
-  });
+  DATA.vehicles.forEach(v => (v.views||[]).forEach(view => { if(view.credit) credits.push(view.credit); }));
   if(credits.length)
     document.getElementById('credits').innerHTML = '차량 사진: ' + credits.join(' · ') + ' (Wikimedia Commons)';
 })();

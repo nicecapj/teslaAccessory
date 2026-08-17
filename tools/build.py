@@ -1,5 +1,11 @@
 # -*- coding: utf-8 -*-
-"""Compose final index.html: template + scraped items + zones + vehicles + photos."""
+"""Compose index.html from template + scraped items + zones + vehicle photos.
+
+Usage:
+    python tools/build.py                  -> ../index.html      (public, no AdSense)
+    python tools/build.py --adsense --out ../deploy/index.html   (deployed, with AdSense)
+"""
+import argparse
 import base64
 import json
 import os
@@ -8,25 +14,27 @@ import sys
 import urllib.parse
 
 BASE = os.path.dirname(os.path.abspath(__file__))
-OUT = os.path.join(BASE, "..", "index.html")
+
+ADSENSE = ('<script async src="https://pagead2.googlesyndication.com/pagead/js/'
+           'adsbygoogle.js?client=ca-pub-6042666456318189" crossorigin="anonymous"></script>')
 
 ZONES = [
     ("ext-front",  "ext", "프론트 · 프렁크", "앞 범퍼 하단 송풍구(벌레막이)와 프렁크 안쪽 송풍구"),
     ("ext-wiper",  "ext", "와이퍼 · 윈드실드", "앞유리 하단 와이퍼"),
-    ("ext-camera", "ext", "사이드 카메라", "앞 펜더의 방향지시 카메라 렌즈"),
-    ("ext-door",   "ext", "도어 (외부)", "도어 핸들 · 엣지 · 실링 부위"),
-    ("ext-wheel",  "ext", "휠 · 타이어 · 하부", "머드플랩, 공기압, 잭 포인트"),
+    ("ext-camera", "ext", "카메라 (외부)", "펜더 방향지시 카메라 · 전방 카메라"),
+    ("ext-door",   "ext", "도어 (외부)", "도어 핸들 · 엣지 · 실링 · 미러 부위"),
+    ("ext-wheel",  "ext", "휠 · 타이어 · 하부", "머드플랩, 휠캡, 공기압, 잭 포인트"),
     ("ext-roof",   "ext", "루프 글라스", "파노라마 글라스 루프(선쉐이드) · 차박 텐트"),
     ("ext-charge", "ext", "충전 포트", "뒤 왼쪽 테일램프 옆 충전구"),
     ("ext-rear",   "ext", "테일게이트", "트렁크 입구 · 리어 범퍼 상단"),
     ("int-pedal",  "int", "페달", "가속 · 브레이크 페달 커버"),
-    ("int-wheel",  "int", "스티어링 · 계기판", "핸들(요크) 교체와 핸들 뒤 계기판"),
+    ("int-wheel",  "int", "스티어링 · 계기판", "핸들(요크) 교체, 핸들 커버, 핸들 뒤 계기판"),
     ("int-mirror", "int", "룸미러 주변", "실내 카메라 · 하이패스 부착 위치"),
     ("int-screen", "int", "센터 디스플레이", "15.4인치 중앙 화면과 그 주변"),
-    ("int-dash",   "int", "대시보드 · 글로브박스", "조수석 쪽 수납함과 대시보드 위"),
+    ("int-dash",   "int", "대시보드 · 글로브박스", "조수석 쪽 수납함, 대시보드, 앞좌석 송풍구"),
     ("int-console","int", "센터콘솔", "무선충전 패드 · 컵홀더 · 콘솔 수납"),
     ("int-seat",   "int", "시트", "1·2열 시트, 시트 아래 공간, 안전벨트"),
-    ("int-door",   "int", "도어 트림 (실내)", "도어 안쪽 킥 부위 · 문턱(실) · 열림 버튼"),
+    ("int-door",   "int", "도어 트림 (실내)", "도어 안쪽 킥 부위 · 문턱(실) · 열림 버튼 · 도어 수납"),
     ("int-floor",  "int", "플로어", "실내 바닥 + 프렁크/트렁크 매트"),
     ("int-rear",   "int", "2열", "뒷좌석 송풍구 · 8인치 스크린 · 팔걸이"),
     ("int-trunk",  "int", "트렁크", "트렁크 바닥 · 양옆 수납 공간"),
@@ -92,7 +100,7 @@ MAP = {
     "테슬라 노래방 마이크": "int-misc",
 }
 
-# ---- essentials (user-curated must-buy list) ----
+# ---- essentials (user-curated must-buy list): name -> alias shown on card ----
 ESSENTIAL = {
     "도어 실 가드 카본 8EA": "도어실가드",
     "엑셀,브레이크 페달": "안전패달",
@@ -104,14 +112,60 @@ ESSENTIAL = {
     "프론트범퍼,프렁크 송풍구 보호커버": "앞범퍼 벌레막이 · 프렁크 안쪽 송풍구",
 }
 
+# ---- reference prices the user confirmed on AliExpress (duplicates were merged
+#      into the existing excel item; lowest seen price kept) ----
+REF_PRICES = {
+    "2열 에어벤트커버2EA": 1900,
+    "내부카메라 보호커버": 1400,
+    "중앙모니터수납함": 9900,
+    "도어 실 가드 카본 8EA": 51400,
+    "2열 도어 비상해제": 2009,
+    "센터콘솔수납함": 29319,
+    "머드플랩": 9200,
+    "엑셀,브레이크 페달": 7926,
+    "프론트범퍼,프렁크 송풍구 보호커버": 8754,
+    "콘솔 충전 도킹스테이션": 21040,
+}
+
 # ---- items the user asked for that are not in the Excel ----
+# (id stability: append only, never reorder — saved prices/picks key off item id)
 NEW_ITEMS = [
     {"name": "RF 하이패스 단말기", "zone": "int-mirror", "essential": "필수",
-     "kw": "RF 하이패스 단말기", "cars": ["juniper", "m3", "yl"]},
+     "kw": "RF 하이패스 단말기", "ko": True, "cars": ["juniper", "m3", "yl"]},
     {"name": "선쉐이드 (자석식)", "zone": "ext-roof", "essential": "필수",
-     "kw": "Tesla Model Y magnetic roof sunshade", "cars": ["juniper", "m3", "yl"]},
+     "kw": "Tesla Model Y magnetic roof sunshade", "cars": ["juniper", "m3", "yl"],
+     "ref": 44700},
     {"name": "안전벨트 연장 클립", "zone": "int-seat", "essential": "필수",
      "kw": "seat belt extender clip", "cars": ["juniper", "m3", "yl"]},
+    # --- 2026-08-18 user-picked AliExpress finds ---
+    {"name": "에어벤트 방향제 클립", "zone": "int-dash", "ref": 2650, "ko": True,
+     "kw": "테슬라 에어벤트 방향제 클립", "cars": ["juniper", "m3", "yl"]},
+    {"name": "스티어링 휠 커버 (카본)", "zone": "int-wheel", "ref": 9900, "ko": True,
+     "kw": "테슬라 스티어링 휠 커버 카본", "cars": ["juniper", "m3", "yl"]},
+    {"name": "센터콘솔 랩 패널 커버", "zone": "int-console", "ref": 2650, "ko": True,
+     "kw": "테슬라 센터 콘솔 랩 패널 커버", "cars": ["juniper", "m3", "yl"]},
+    {"name": "시트 쿠션 세트 (PU 분리형)", "zone": "int-seat", "ref": 73500, "ko": True,
+     "kw": "테슬라 모델Y 시트 쿠션 세트 PU", "cars": ["juniper", "yl"]},
+    {"name": "전방 카메라 보호 커버", "zone": "ext-camera", "ref": 7844, "ko": True,
+     "kw": "테슬라 모델Y 주니퍼 전방 카메라 보호", "cars": ["juniper"]},
+    {"name": "2열 스크린 강화유리 필름", "zone": "int-rear", "ref": 8872, "ko": True,
+     "kw": "테슬라 뒷좌석 스크린 강화유리 필름", "cars": ["juniper", "m3"]},
+    {"name": "스티어링 휠 무게추", "zone": "int-wheel", "ref": 10650, "ko": True,
+     "kw": "테슬라 스티어링 휠 무게추", "cars": ["juniper", "m3", "yl"]},
+    {"name": "가죽 트렁크 매트", "zone": "int-trunk", "ref": 69527, "ko": True,
+     "kw": "테슬라 모델Y 주니퍼 가죽 트렁크 매트", "cars": ["juniper"]},
+    {"name": "도어 스위치 스웨이드 트림 커버", "zone": "int-door", "ref": 6820, "ko": True,
+     "kw": "테슬라 도어 스위치 스웨이드 트림 커버", "cars": ["juniper", "m3"]},
+    {"name": "프렁크 쿨러백 (단열 수납)", "zone": "ext-front", "ref": 32600, "ko": True,
+     "kw": "테슬라 프렁크 쿨러 오거나이저 단열", "cars": ["juniper", "m3"]},
+    {"name": "미러·도어 긁힘 방지 스트립", "zone": "ext-door", "ref": 7754, "ko": True,
+     "kw": "테슬라 미러 도어 긁힘 방지 스트립", "cars": ["juniper", "m3", "yl"]},
+    {"name": "도어 수납함·쓰레기통", "zone": "int-door", "ref": 19850, "ko": True,
+     "kw": "테슬라 도어 수납함 쓰레기통", "cars": ["juniper", "yl"]},
+    {"name": "19인치 휠캡 (스무스 스타일)", "zone": "ext-wheel", "ref": 69752, "ko": True,
+     "kw": "테슬라 모델Y 주니퍼 19인치 휠캡", "cars": ["juniper"]},
+    {"name": "19인치 허브캡 (퍼포먼스 스타일)", "zone": "ext-wheel", "ko": True,
+     "kw": "테슬라 모델Y 19인치 허브캡 퍼포먼스", "cars": ["juniper"]},
 ]
 
 # ---- AliExpress equivalent-search keywords for Korean-shop items ----
@@ -183,27 +237,32 @@ def b64file(path, mime="image/jpeg"):
         return "data:%s;base64," % mime + base64.b64encode(f.read()).decode()
 
 
-def load_vehicle_photos():
-    """vehicles.json: {vehicleId: {ext: {file, markers:{zone:[x,y]}, credit}, int: {...}}}"""
-    vp_path = os.path.join(BASE, "vehicles.json")
-    if not os.path.exists(vp_path):
-        return {}
-    with open(vp_path, encoding="utf-8") as f:
+def load_vehicles():
+    """vehicles.json: {vehicleId: [ {key,en,ko,file,credit,markers}, ... ]}"""
+    with open(os.path.join(BASE, "vehicles.json"), encoding="utf-8") as f:
         conf = json.load(f)
-    out = {}
-    for vid, views in conf.items():
-        out[vid] = {}
-        for view, v in views.items():
-            img = os.path.join(BASE, "commons", v["file"])
-            out[vid][view] = {
-                "img": b64file(img),
+    labels = {"juniper": "모델 Y 주니퍼", "m3": "모델 3 하이랜드", "yl": "모델 Y L"}
+    vehicles = []
+    for vid in ["juniper", "m3", "yl"]:
+        views = []
+        for v in conf.get(vid, []):
+            views.append({
+                "key": v["key"], "en": v["en"], "ko": v["ko"],
+                "img": b64file(os.path.join(BASE, "commons", v["file"])),
                 "markers": v["markers"],
                 "credit": v.get("credit", ""),
-            }
-    return out
+            })
+        vehicles.append({"id": vid, "label": labels[vid], "views": views})
+    return vehicles
 
 
 def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--adsense", action="store_true",
+                    help="include the AdSense loader (deployed builds only; keep out of the public repo)")
+    ap.add_argument("--out", default=os.path.join(BASE, "..", "index.html"))
+    args = ap.parse_args()
+
     with open(os.path.join(BASE, "items.json"), encoding="utf-8") as f:
         raw = json.load(f)
 
@@ -230,6 +289,8 @@ def main():
         }
         if name in ESSENTIAL:
             it["essential"] = ESSENTIAL[name]
+        if name in REF_PRICES:
+            it["ref"] = REF_PRICES[name]
         if r["source"] == "ali":
             if r.get("title"):
                 it["search"] = search_url(title_query(r["title"]))
@@ -241,44 +302,43 @@ def main():
         items.append(it)
 
     for n in NEW_ITEMS:
-        items.append({
+        it = {
             "id": len(items),
             "name": n["name"],
             "zone": n["zone"],
             "source": "ali",
             "group": "acc",
-            "url": search_url(n["kw"], korean=("하이패스" in n["kw"])),
+            "url": search_url(n["kw"], korean=n.get("ko", False)),
             "noProduct": True,
             "title": "",
             "thumb": "",
             "photos": [],
             "cars": n["cars"],
-            "essential": n["essential"],
-        })
+        }
+        if n.get("essential"):
+            it["essential"] = n["essential"]
+        if n.get("ref"):
+            it["ref"] = n["ref"]
+        items.append(it)
 
     zones = []
     for num, (zid, view, name, desc) in enumerate(ZONES, 1):
         zones.append({"id": zid, "view": view, "num": num, "name": name, "desc": desc})
 
-    vehicles_photos = load_vehicle_photos()
-    vehicles = []
-    for vid, label in [("juniper", "모델 Y 주니퍼"), ("m3", "모델 3 하이랜드"), ("yl", "모델 Y L")]:
-        vehicles.append({"id": vid, "label": label,
-                         "views": vehicles_photos.get(vid, {})})
-
-    data = {"zones": zones, "items": items, "vehicles": vehicles}
+    data = {"zones": zones, "items": items, "vehicles": load_vehicles()}
     payload = json.dumps(data, ensure_ascii=False, separators=(",", ":"))
 
     with open(os.path.join(BASE, "template.html"), encoding="utf-8") as f:
         tpl = f.read()
     html = tpl.replace("/*__DATA__*/", payload, 1)
-    with open(OUT, "w", encoding="utf-8") as f:
+    html = html.replace("<!--ADSENSE-->", ADSENSE if args.adsense else "", 1)
+    out = os.path.abspath(args.out)
+    with open(out, "w", encoding="utf-8") as f:
         f.write(html)
     ess = sum(1 for i in items if i.get("essential"))
-    ph = sum(1 for i in items if i.get("photos"))
-    print("wrote %s: %d bytes, %d items (%d essential, %d with gallery), %d zones, vehicles with photos: %s"
-          % (OUT, len(html), len(items), ess, ph, len(zones),
-             [v["id"] for v in vehicles if v["views"]]))
+    ref = sum(1 for i in items if i.get("ref"))
+    print("wrote %s: %d bytes, %d items (%d essential, %d with ref price), adsense=%s"
+          % (out, len(html), len(items), ess, ref, args.adsense))
 
 
 if __name__ == "__main__":
