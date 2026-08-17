@@ -339,7 +339,8 @@ function renderViews(){
   const v = vehById[vehicle];
   const items = vehItems(vehicle);
   const zonesWithItems = DATA.zones.filter(z => items.some(it => it.zone===z.id));
-  const views = [...(v.views||[]), ...SHARED_VIEWS];
+  const own = v.views||[];
+  const views = [...own, ...SHARED_VIEWS.filter(sv => !own.some(x => x.key===sv.key))];
   const placed = new Set();
   let html = '';
   views.forEach(view => {
