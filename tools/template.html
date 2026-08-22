@@ -202,6 +202,7 @@ footer p{margin:4px 0}
   <button class="chip ess-chip" data-src="ess">★ 필수 <span class="n" id="n-ess"></span></button>
   <button class="chip zen-chip" data-src="zen">젠그레이 <span class="n" id="n-zen"></span></button>
   <button class="chip" data-src="yz">YZ <span class="n" id="n-yz"></span></button>
+  <button class="chip" data-src="prem">고급 <span class="n" id="n-prem"></span></button>
   <button class="chip" data-src="ali">AliExpress <span class="n" id="n-ali"></span></button>
   <button class="chip" data-src="naver">네이버 <span class="n" id="n-naver"></span></button>
   <button class="chip" data-src="tune">티슬릭스 튜닝 <span class="n" id="n-tune"></span></button>
@@ -338,7 +339,7 @@ function renderVtabs(){
   document.querySelectorAll('.vtab').forEach(b => b.addEventListener('click', () => {
     vehicle = b.dataset.v; zoneFilter = null;
     document.getElementById('zoneclear').classList.remove('show');
-    if((srcFilter==='zen'||srcFilter==='yz') && !vehItems(vehicle).some(i=>hasTag(i,srcFilter))){
+    if(TAGS.includes(srcFilter) && !vehItems(vehicle).some(i=>hasTag(i,srcFilter))){
       srcFilter = 'all';
       document.querySelectorAll('#filterbar .chip').forEach(x=>x.classList.toggle('on', x.dataset.src==='all'));
     }
@@ -417,6 +418,7 @@ function itemHTML(it){
   </article>`;
 }
 
+const TAGS = ['zen','yz','prem'];
 const hasTag = (it,t) => it.tag===t || (t==='yz' && /\byz\b/i.test(it.name+' '+(it.title||'')));
 
 function matches(it){
@@ -428,7 +430,7 @@ function matches(it){
   }
   if(srcFilter==='picked') return store.getItem('pick:'+it.id)==='1';
   if(srcFilter==='ess') return !!it.essential;
-  if(srcFilter==='zen'||srcFilter==='yz') return hasTag(it,srcFilter);
+  if(TAGS.includes(srcFilter)) return hasTag(it,srcFilter);
   if(srcFilter==='ali') return it.source==='ali';
   if(srcFilter==='naver') return it.source==='naver' && it.group!=='tune';
   if(srcFilter==='tune') return it.group==='tune';
@@ -533,7 +535,7 @@ function updateCounts(){
   const n = (id,v) => document.getElementById(id).textContent = v;
   n('n-all', its.length);
   n('n-ess', its.filter(i=>i.essential).length);
-  ['zen','yz'].forEach(t => {
+  TAGS.forEach(t => {
     const tn = its.filter(i=>hasTag(i,t)).length;
     n('n-'+t, tn);
     document.querySelector(`[data-src="${t}"]`).style.display = tn ? '' : 'none';

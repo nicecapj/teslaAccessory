@@ -189,6 +189,9 @@ NEW_ITEMS = [
      "kw": "YZ 테슬라 모델3 모델Y 자석식 차량용 휴대폰 홀더", "cars": ["juniper", "m3", "yl"]},
     {"name": "휴대용 접이식 테이블 (스티어링 휠 장착)", "zone": "int-wheel", "ko": True,
      "kw": "테슬라 모델Y 스티어링 휠 접이식 테이블 트레이", "cars": ["juniper", "m3", "yl"]},
+    # --- "고급" 필터 (prem 태그) ---
+    {"name": "전동식 선쉐이드", "zone": "ext-roof", "tag": "prem", "ko": True,
+     "kw": "테슬라 모델Y 전동 선쉐이드", "cars": ["juniper", "m3", "yl"]},
 ]
 
 # ---- AliExpress equivalent-search keywords for Korean-shop items ----
