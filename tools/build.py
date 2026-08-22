@@ -171,6 +171,11 @@ NEW_ITEMS = [
      "kw": "지패스 AP500S 하이패스", "naver": True, "ref": 46400, "cars": ["juniper", "m3", "yl"]},
     {"name": "엠피온 SET-260 (RF 유선 하이패스)", "zone": "int-mirror", "essential": "필수",
      "kw": "엠피온 SET-260 하이패스", "naver": True, "ref": 56900, "cars": ["juniper", "m3", "yl"]},
+    # --- 2026-08-23 주니퍼 젠그레이 내장색 오염 방지 용품 ("젠그레이" 필터로 모아봄) ---
+    {"name": "시트커버 (젠그레이 오염방지)", "zone": "int-seat", "tag": "zen", "ko": True,
+     "kw": "테슬라 모델Y 주니퍼 방수 시트커버", "cars": ["juniper"]},
+    {"name": "헤드레스트 목쿠션·커버 (젠그레이 오염방지)", "zone": "int-seat", "tag": "zen", "ko": True,
+     "kw": "테슬라 헤드레스트 목쿠션 커버", "cars": ["juniper"], "ref": 13900},
 ]
 
 # ---- AliExpress equivalent-search keywords for Korean-shop items ----
@@ -331,6 +336,8 @@ def main():
             it["essential"] = n["essential"]
         if n.get("ref"):
             it["ref"] = n["ref"]
+        if n.get("tag"):
+            it["tag"] = n["tag"]
         items.append(it)
 
     zones = []
