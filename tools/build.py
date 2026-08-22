@@ -178,6 +178,8 @@ NEW_ITEMS = [
      "kw": "테슬라 헤드레스트 목쿠션 커버", "cars": ["juniper"], "ref": 13900},
     {"name": "5인승 시트 쿠션 (화이트)", "zone": "int-seat", "tag": "zen", "ko": True,
      "kw": "테슬라 모델Y 5인승 시트 쿠션 화이트", "cars": ["juniper"]},
+    {"name": "통기성 가죽 시트 커버 쿠션 (주니퍼 2025-2026)", "zone": "int-seat", "tag": "zen", "ko": True,
+     "kw": "테슬라 신형 모델Y 주니퍼 2025 2026 통기성 가죽 시트 커버 쿠션", "cars": ["juniper"]},
 ]
 
 # ---- AliExpress equivalent-search keywords for Korean-shop items ----
