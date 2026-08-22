@@ -176,6 +176,8 @@ NEW_ITEMS = [
      "kw": "테슬라 모델Y 주니퍼 방수 시트커버", "cars": ["juniper"]},
     {"name": "헤드레스트 목쿠션·커버 (젠그레이 오염방지)", "zone": "int-seat", "tag": "zen", "ko": True,
      "kw": "테슬라 헤드레스트 목쿠션 커버", "cars": ["juniper"], "ref": 13900},
+    {"name": "5인승 시트 쿠션 (화이트)", "zone": "int-seat", "tag": "zen", "ko": True,
+     "kw": "테슬라 모델Y 5인승 시트 쿠션 화이트", "cars": ["juniper"]},
 ]
 
 # ---- AliExpress equivalent-search keywords for Korean-shop items ----
