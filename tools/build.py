@@ -182,6 +182,8 @@ NEW_ITEMS = [
      "kw": "테슬라 신형 모델Y 주니퍼 2025 2026 통기성 가죽 시트 커버 쿠션", "cars": ["juniper"]},
     {"name": "메모리폼 헤드레스트 (목받침)", "zone": "int-seat", "tag": "zen", "ko": True,
      "kw": "테슬라 메모리폼 차량용 헤드레스트", "cars": ["juniper"]},
+    {"name": "목·머리·허리 지지대 세트", "zone": "int-seat", "tag": "zen", "ko": True,
+     "kw": "테슬라 모델Y 목쿠션 헤드레스트 허리 지지대", "cars": ["juniper"]},
 ]
 
 # ---- AliExpress equivalent-search keywords for Korean-shop items ----
