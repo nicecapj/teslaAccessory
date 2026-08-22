@@ -382,7 +382,7 @@ function itemHTML(it){
   const ref = it.ref ? `<button class="refbtn" data-ref="${it.ref}" title="확인해둔 참고가 — 누르면 가격 칸에 채워집니다">참고 ${Number(it.ref).toLocaleString('ko-KR')}</button>` : '';
   let btns = '';
   if(it.noProduct){
-    btns = `<a class="btn primary" href="${it.url}" target="_blank" rel="noopener">알리 최저가 검색 ↗</a>`;
+    btns = `<a class="btn primary" href="${it.url}" target="_blank" rel="noopener">${it.source==='naver'?'네이버':'알리'} 최저가 검색 ↗</a>`;
   } else {
     btns = `<a class="btn primary" href="${it.url}" target="_blank" rel="noopener">상품 보기 ↗</a>`;
     if(it.search) btns += ` <a class="btn" href="${it.search}" target="_blank" rel="noopener">${it.source==='naver'?'알리 동일제품 검색':'최저가 검색'} ↗</a>`;
@@ -535,7 +535,7 @@ function openModal(id){
     (it.photos&&it.photos.length>1) ? '판매 페이지의 상품 사진 (장착 모습 포함)' :
     '지금은 대표 사진만 있습니다. 장착 사진은 상품 페이지에서 더 볼 수 있어요.';
   let btns = it.noProduct
-    ? `<a class="btn primary" href="${it.url}" target="_blank" rel="noopener">알리 최저가 검색 ↗</a>`
+    ? `<a class="btn primary" href="${it.url}" target="_blank" rel="noopener">${it.source==='naver'?'네이버':'알리'} 최저가 검색 ↗</a>`
     : `<a class="btn primary" href="${it.url}" target="_blank" rel="noopener">상품 보기 ↗</a>` +
       (it.search?` <a class="btn" href="${it.search}" target="_blank" rel="noopener">최저가 검색 ↗</a>`:'');
   document.getElementById('m-row').innerHTML = btns;

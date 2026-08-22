@@ -166,6 +166,11 @@ NEW_ITEMS = [
      "kw": "테슬라 모델Y 주니퍼 19인치 휠캡", "cars": ["juniper"]},
     {"name": "19인치 허브캡 (퍼포먼스 스타일)", "zone": "ext-wheel", "ko": True,
      "kw": "테슬라 모델Y 19인치 허브캡 퍼포먼스", "cars": ["juniper"]},
+    # --- 2026-08-23 RF 유선 하이패스 단말기 2종 (국내 전용 — 네이버쇼핑 검색, 참고가는 다나와 최저가) ---
+    {"name": "지패스 GPASS AP500S (RF 유선 하이패스)", "zone": "int-mirror", "essential": "필수",
+     "kw": "지패스 AP500S 하이패스", "naver": True, "ref": 46400, "cars": ["juniper", "m3", "yl"]},
+    {"name": "엠피온 SET-260 (RF 유선 하이패스)", "zone": "int-mirror", "essential": "필수",
+     "kw": "엠피온 SET-260 하이패스", "naver": True, "ref": 56900, "cars": ["juniper", "m3", "yl"]},
 ]
 
 # ---- AliExpress equivalent-search keywords for Korean-shop items ----
@@ -224,6 +229,11 @@ def search_url(q, korean=False):
     host = "ko.aliexpress.com" if korean else "www.aliexpress.com"
     return ("https://%s/wholesale?SearchText=" % host
             + urllib.parse.quote(q) + "&SortType=price_asc")
+
+
+def naver_search_url(q):
+    return ("https://search.shopping.naver.com/search/all?query="
+            + urllib.parse.quote(q) + "&sort=price_asc")
 
 
 def title_query(title):
@@ -302,13 +312,15 @@ def main():
         items.append(it)
 
     for n in NEW_ITEMS:
+        is_naver = n.get("naver", False)
         it = {
             "id": len(items),
             "name": n["name"],
             "zone": n["zone"],
-            "source": "ali",
+            "source": "naver" if is_naver else "ali",
             "group": "acc",
-            "url": search_url(n["kw"], korean=n.get("ko", False)),
+            "url": (naver_search_url(n["kw"]) if is_naver
+                    else search_url(n["kw"], korean=n.get("ko", False))),
             "noProduct": True,
             "title": "",
             "thumb": "",
