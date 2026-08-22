@@ -162,9 +162,9 @@ NEW_ITEMS = [
      "kw": "테슬라 미러 도어 긁힘 방지 스트립", "cars": ["juniper", "m3", "yl"]},
     {"name": "도어 수납함·쓰레기통", "zone": "int-door", "ref": 19850, "ko": True,
      "kw": "테슬라 도어 수납함 쓰레기통", "cars": ["juniper", "yl"]},
-    {"name": "19인치 휠캡 (스무스 스타일)", "zone": "ext-wheel", "ref": 69752, "ko": True,
+    {"name": "19인치 휠캡 (스무스 스타일)", "zone": "ext-wheel", "ref": 69752, "ko": True, "tag": "prem",
      "kw": "테슬라 모델Y 주니퍼 19인치 휠캡", "cars": ["juniper"]},
-    {"name": "19인치 허브캡 (퍼포먼스 스타일)", "zone": "ext-wheel", "ko": True,
+    {"name": "19인치 허브캡 (퍼포먼스 스타일)", "zone": "ext-wheel", "ko": True, "tag": "prem",
      "kw": "테슬라 모델Y 19인치 허브캡 퍼포먼스", "cars": ["juniper"]},
     # --- 2026-08-23 RF 유선 하이패스 단말기 2종 (국내 전용 — 네이버쇼핑 검색, 참고가는 다나와 최저가) ---
     {"name": "지패스 GPASS AP500S (RF 유선 하이패스)", "zone": "int-mirror", "essential": "필수",
@@ -192,6 +192,10 @@ NEW_ITEMS = [
     # --- "고급" 필터 (prem 태그) ---
     {"name": "전동식 선쉐이드", "zone": "ext-roof", "tag": "prem", "ko": True,
      "kw": "테슬라 모델Y 전동 선쉐이드", "cars": ["juniper", "m3", "yl"]},
+    {"name": "HUD 헤드업 디스플레이", "zone": "int-wheel", "tag": "prem", "ko": True,
+     "kw": "테슬라 모델Y 모델3 HUD 헤드업 디스플레이", "cars": ["juniper", "m3", "yl"]},
+    {"name": "HUD 계기판 디스플레이 (스티어링 뒤)", "zone": "int-wheel", "tag": "prem", "ko": True,
+     "kw": "테슬라 모델Y 주니퍼 HUD 계기판 디스플레이", "cars": ["juniper", "yl"]},
 ]
 
 # ---- AliExpress equivalent-search keywords for Korean-shop items ----
