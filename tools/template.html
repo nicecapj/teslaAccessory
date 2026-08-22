@@ -338,7 +338,7 @@ function renderVtabs(){
   document.querySelectorAll('.vtab').forEach(b => b.addEventListener('click', () => {
     vehicle = b.dataset.v; zoneFilter = null;
     document.getElementById('zoneclear').classList.remove('show');
-    if((srcFilter==='zen'||srcFilter==='yz') && !vehItems(vehicle).some(i=>i.tag===srcFilter)){
+    if((srcFilter==='zen'||srcFilter==='yz') && !vehItems(vehicle).some(i=>hasTag(i,srcFilter))){
       srcFilter = 'all';
       document.querySelectorAll('#filterbar .chip').forEach(x=>x.classList.toggle('on', x.dataset.src==='all'));
     }
@@ -417,6 +417,8 @@ function itemHTML(it){
   </article>`;
 }
 
+const hasTag = (it,t) => it.tag===t || (t==='yz' && /\byz\b/i.test(it.name+' '+(it.title||'')));
+
 function matches(it){
   if(!it.cars.includes(vehicle)) return false;
   if(zoneFilter && it.zone!==zoneFilter) return false;
@@ -426,7 +428,7 @@ function matches(it){
   }
   if(srcFilter==='picked') return store.getItem('pick:'+it.id)==='1';
   if(srcFilter==='ess') return !!it.essential;
-  if(srcFilter==='zen'||srcFilter==='yz') return it.tag===srcFilter;
+  if(srcFilter==='zen'||srcFilter==='yz') return hasTag(it,srcFilter);
   if(srcFilter==='ali') return it.source==='ali';
   if(srcFilter==='naver') return it.source==='naver' && it.group!=='tune';
   if(srcFilter==='tune') return it.group==='tune';
@@ -532,7 +534,7 @@ function updateCounts(){
   n('n-all', its.length);
   n('n-ess', its.filter(i=>i.essential).length);
   ['zen','yz'].forEach(t => {
-    const tn = its.filter(i=>i.tag===t).length;
+    const tn = its.filter(i=>hasTag(i,t)).length;
     n('n-'+t, tn);
     document.querySelector(`[data-src="${t}"]`).style.display = tn ? '' : 'none';
   });

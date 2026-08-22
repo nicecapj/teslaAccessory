@@ -185,6 +185,7 @@ NEW_ITEMS = [
     {"name": "목·머리·허리 지지대 세트", "zone": "int-seat", "tag": "zen", "ko": True,
      "kw": "테슬라 모델Y 목쿠션 헤드레스트 허리 지지대", "cars": ["juniper"]},
     {"name": "자석식 휴대폰 홀더 (YZ, 모델3·Y)", "zone": "int-screen", "tag": "yz", "ko": True,
+     "essential": "핸드폰 거치대",
      "kw": "YZ 테슬라 모델3 모델Y 자석식 차량용 휴대폰 홀더", "cars": ["juniper", "m3", "yl"]},
     {"name": "휴대용 접이식 테이블 (스티어링 휠 장착)", "zone": "int-wheel", "ko": True,
      "kw": "테슬라 모델Y 스티어링 휠 접이식 테이블 트레이", "cars": ["juniper", "m3", "yl"]},
