@@ -184,7 +184,7 @@ NEW_ITEMS = [
      "kw": "테슬라 메모리폼 차량용 헤드레스트", "cars": ["juniper"]},
     {"name": "목·머리·허리 지지대 세트", "zone": "int-seat", "tag": "zen", "ko": True,
      "kw": "테슬라 모델Y 목쿠션 헤드레스트 허리 지지대", "cars": ["juniper"]},
-    {"name": "자석식 휴대폰 홀더 (YZ, 모델3·Y)", "zone": "int-screen", "ko": True,
+    {"name": "자석식 휴대폰 홀더 (YZ, 모델3·Y)", "zone": "int-screen", "tag": "yz", "ko": True,
      "kw": "YZ 테슬라 모델3 모델Y 자석식 차량용 휴대폰 홀더", "cars": ["juniper", "m3", "yl"]},
 ]
 
